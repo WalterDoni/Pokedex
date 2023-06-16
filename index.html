@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/pokeballHeader.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./js/statChartOpenCard.js"></script>
+    <script src="./js/data.js"></script>
+    <script src="./js/script.js"></script>
+    
+    <title>Pokedex</title>
+</head>
+
+<body onload="initiate()">
+    
+    <header>
+        <div><img class="headerLogo" src="./img/headerLogo.png"></div>
+        <div class="shadow"></div>
+        <div class="pokeball">
+            <div class="top"></div>
+            <div class="bottom"></div>
+            <div class="middle"></div>
+        </div>
+        <div class="searchfield"><input placeholder="Search for specific Pokemon..." onkeypress="searchForPokemon()"
+                type="text" id="searchfield"></div>
+    </header>
+
+    <div id="pokemonCardContainer"></div>
+    <div id="openedPokemonCard" class="d-none"></div>
+    <div class="loadbutton"><button onclick="loadMorePokemons()">Load more Pokemons</button></div>
+  
+    <footer>
+
+        <div>
+            <p>SocialMedia:(FÜR DIE ZUKUNFT!!!!)</p>
+            <a href="">Soziales Netzwerk</a>
+            <a href="">Soziales Netzwerk</a>
+
+        </div>
+        <div>Created with API from: <a href="https://pokeapi.co/">PokeAPI</a></div>
+        <div>
+            <p>Designed by: <b>Doni Walter</b></p>
+            <p>Created by: <b>Doni Walter</b></p>
+            <p>This was a project during my training at the <a href="https://developerakademie.com/">Developer
+                    Akademie</a></p>
+
+        </div>
+    </footer>
+
+</body>
+
+</html>

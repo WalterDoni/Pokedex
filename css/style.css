@@ -1,0 +1,396 @@
+body {
+    font-family: 'Chakra Petch';
+    font-style: italic;
+    margin: 0;
+    background-color: black;
+    z-index: 1;
+}
+
+body::-webkit-scrollbar {
+    width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+    background: black;
+
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: white;
+    border-radius: 20px;/
+}
+
+.d-none {
+    display: none !important;
+}
+
+/*--------------------------------Header-----------------------------------------------------*/
+
+header {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 8px solid crimson;
+    border-style: ridge;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background-color: beige !important;
+}
+
+.headerLogo {
+    margin-left: 10%;
+    width: 250px;
+    height: auto;
+
+}
+
+.headerPokeballLogo {
+    width: 100px;
+    height: auto;
+}
+
+.searchfield {
+    margin-right: 2.5%;
+}
+
+header div input {
+    height: 50px;
+    width: 220px;
+    border-style: ridge;
+    border-width: 6px;
+    border-radius: 8px;
+    border-color: crimson;
+    font-size: 15px;
+    font-family: 'Chakra Petch';
+}
+
+header div input:focus {
+    outline: none;
+    border-color: crimson;
+}
+
+header div input:hover {
+    cursor: pointer;
+}
+
+/*----------------------------closed PokemonCard-----------------------------------------------------*/
+
+#pokemonCardContainer {
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: black;
+}
+
+.closedPokemonCard {
+    margin: 10px;
+    width: 285px;
+    border-radius: 18px;
+    background-color: rgb(98, 189, 90);
+    position: relative;
+    color: white;
+    text-shadow: rgba(0, 0, 0, 0.7) 2px 1.5px;
+    height: 250px;
+    box-shadow: rgba(255, 255, 255, 0.6) 0 15px 30px -3px;
+}
+
+.closedPokemonCard:hover {
+    transform: scale(1.08);
+    cursor: pointer;
+}
+
+.closedPokemonCard::before {
+    content: "";
+    background-image: url(../img/pokeball.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    border-radius: 18px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+    z-index: 0;
+
+}
+
+.closedPokemonCard h1 {
+    font-size: 28px;
+    margin: 8px;
+}
+
+#pokemonNumber {
+    position: relative;
+    bottom: 70px;
+    padding-left: 205px;
+    font-size: 30px;
+}
+
+#pokemonAvatar {
+    position: absolute;
+    height: 210px;
+    bottom: 0px;
+    left: 75px;
+
+
+}
+
+
+#pokemonType1 {
+    position: relative;
+    bottom: 50px;
+    left: 10px;
+    color: white;
+    font-size: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    height: 30px;
+    width: 55px;
+    border-radius: 8px;
+    padding: 3px;
+}
+
+#pokemonType2 {
+    position: relative;
+    bottom: 50px;
+    left: 10px;
+    color: white;
+    font-size: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    height: 30px;
+    width: 55px;
+    border-radius: 8px;
+    padding: 3px;
+}
+
+/*----------------------------open PokemonCard-----------------------------------------------------*/
+
+
+.backgroundColorOpenCard {
+    background-color: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-shadow: rgba(0, 0, 0, 0.7) 2px 1.5px;
+}
+
+.openMainContainerPokemon {
+    height: 800px;
+    width: 600px;
+    background-color: black;
+    box-shadow: rgba(255, 255, 255, 0.6) 0 15px 30px;
+    border-radius: 18px;
+}
+
+.seperator {
+    background-color: white;
+    height: 1px;
+    width: 90%;
+    margin-left: 5%;
+}
+
+
+
+/*----------------------------open PokemonCard -->Upper-Section-----------------------------------------------------*/
+.upperSection {
+    background-image: url(../img/openCardBackground.jpg);
+    background-size: 115%;
+    border-radius: 18px;
+
+}
+
+.upperSection h1 {
+    margin-block: 0px;
+    margin-left: 10px;
+}
+
+.upperSection img {
+    height: 400px;
+    margin-left: 160px;
+    margin-top: -80px;
+
+}
+
+/*----------------------------open PokemonCard ---> Lower-Section-----------------------------------------------------*/
+/*--------------------------------open PokemonCard --> Lower-Section --> Tags-----------------------------------------------------*/
+.pokemonTags {
+    display: flex;
+    justify-content: space-evenly;
+    color: white;
+
+}
+
+.pokemonTags p {
+    box-shadow: inset 0 0 0 crimson;
+    transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+}
+
+.pokemonTags p:hover {
+    cursor: pointer;
+    box-shadow: inset 100px 0 0 0 crimson;
+    color: white;
+}
+
+.pokemonstats {
+    width: 100%;
+}
+
+/*----------------------------open PokemonCard --> Lower-Section--> different Stats -----------------------------------------------------*/
+.about {
+    margin-left: 30px;
+}
+
+.skills {
+
+    margin-left: 10px;
+    margin-top: 10px;
+    overflow-y: auto;
+    height: 310px;
+}
+
+.skillsContainer {
+    padding-left: 15px;
+    margin-top: 5px;
+}
+.skills::-webkit-scrollbar {
+    width: 12px;
+    border-radius: 18px;
+}
+
+.skills::-webkit-scrollbar-track {
+    background: black;
+}
+
+.skills::-webkit-scrollbar-thumb {
+    background-color: white;
+    border-radius: 20px; 
+}
+
+/*--------------------------------Buttons-----------------------------------------------------*/
+.loadbutton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 35px 0px;
+}
+
+.loadbutton button {
+    background-color: crimson;
+    color: white;
+    border: none;
+    font-size: 18px;
+    height: 100px;
+    width: 120px;
+    box-shadow: 0 6px 10px rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 50%;
+}
+
+.loadbutton button:active {
+    background-color: crimson;
+    box-shadow: 0 0 2px black;
+    transform: translateY(2px);
+}
+
+.loadbutton button:not(:first-child) {
+    margin-top: 10px;
+}
+
+
+/*--------------------------------Footer-----------------------------------------------------*/
+footer {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    font-style: italic;
+    color: rgb(0, 0, 0);
+    border-top: 8px solid crimson;
+    border-style: ridge;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    background-color: beige;
+}
+
+footer div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/*------------------PokemonTypeColors-----------------*/
+.fire {
+    background-color: rgb(255, 65, 27);
+}
+
+.grass {
+    background-color: rgb(98, 189, 90);
+}
+
+.water {
+    background-color: rgb(43, 155, 227);
+}
+
+.bug {
+    background-color: rgb(146, 193, 42);
+}
+
+.normal {
+    background-color: rgb(188, 187, 170);
+}
+
+.poison {
+    background-color: rgb(149, 83, 205);
+}
+
+.electric {
+    background-color: rgb(255, 220, 2);
+}
+
+.ground {
+    background-color: rgb(166, 116, 56);
+}
+
+.fly {
+    background-color: rgb(151, 202, 255);
+}
+
+.fighting {
+    background-color: rgb(187, 85, 68);
+}
+
+.psychic {
+    background-color: rgb(255, 98, 128);
+}
+
+.rock {
+    background-color: rgb(187, 170, 102);
+}
+
+.ghost {
+    background-color: rgb(110, 67, 112);
+}
+
+.ice {
+    background-color: rgb(116, 207, 192);
+}
+
+.dragon {
+    background-color: rgb(86, 112, 190);
+}
+
+.fairy {
+    background-color: rgb(236, 143, 230);
+}

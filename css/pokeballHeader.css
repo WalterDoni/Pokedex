@@ -1,0 +1,114 @@
+.pokeball {
+    position: absolute;
+    left: 50%;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    overflow: hidden;
+    transform-origin: 50% 100%;
+    animation: wobble 4.5s infinite;
+  }
+  
+  .top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to right, crimson, darkred);
+  }
+
+  .bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to right, white, lightgray);
+  }
+  
+  .shadow {
+    position: absolute;
+    top: 9%;
+    left: 50%;
+    width: 100px;
+    height: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 40%;
+    filter: blur(10px);
+   
+  }
+
+  .middle {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 12px;
+    background: black;
+    transform: translateY(-50%);
+  }
+  
+  .middle::before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    width: 33px;
+    height: 33px;
+    background: black;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .middle::after {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    width: 21px;
+    height: 21px;
+    background: linear-gradient(to right, white, lightgray);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  /*---Animation--*/
+  @keyframes wobble {
+    0%,
+    20%,
+    24%,
+    28%,
+    80%,
+    84%,
+    88%,
+    92%,
+    96%,
+    100% {
+      transform: rotate(0deg);
+    }
+  
+    22%,
+    82%,
+    90% {
+      transform: rotate(4deg);
+    }
+  
+    26%,
+    86%,
+    94% {
+      transform: rotate(-4deg);
+    }
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
