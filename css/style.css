@@ -246,6 +246,10 @@ header div input:hover {
     width: 100%;
 }
 
+#myChart{
+    width: 575px!important;
+    padding-left: 10px;
+}
 /*----------------------------open PokemonCard --> Lower-Section--> different Stats -----------------------------------------------------*/
 .about {
     margin-left: 30px;

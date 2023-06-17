@@ -15,15 +15,8 @@ async function renderPokemonCards() {
         let response = await fetch(url);
         currentPokemon = await response.json();
         allPokemonsData.push(currentPokemon);
-        pokemonCardContainer.innerHTML += `
-        
-    <div class="closedPokemonCard" id="closedPokemonCard${id}" onclick="openPokemonCard(${id})">
-    <h1 id="pokemonName"> ${capitalizeFirstLetter()}</h1> 
-    <p id="pokemonNumber">#${currentPokemon['id']}</p>
-    <p id="pokemonType1">${currentPokemon['types']['0']['type']['name']}</p>
-    <p id="pokemonType2">${currentPokemon['types']['0']['type']['name']}</p>
-    <img id="pokemonAvatar" src="${currentPokemon['sprites']['other']['official-artwork']['front_default']}">
-    </div>`;
+        pokemonCardContainer.innerHTML +=
+            `${closedPokemonCardTemplate(id, currentPokemon,)}`;
         pokemonTypeBackgroundColor(id);
     }
 }
@@ -35,7 +28,6 @@ function pokemonTypeBackgroundColor(id) {
         container.classList.add(currentPokemonType);
     }
 }
-
 function loadMorePokemons() {
     showedPokemonlength += 50;
     initiate();
@@ -53,38 +45,20 @@ async function openPokemonCard(id) {
     let responseevo = await fetch(details);
     detailsPokemon = await responseevo.json();
 
-    
     let evo = detailsPokemon['evolves_from_species'];
 
     container.innerHTML = `<div class="backgroundColorOpenCard" onclick="closeOpenedPokemonCard()">
-  
      <div class="openMainContainerPokemon" onclick="doNotCloseWhenClickedInsightContainer()">
       <div class="upperSection">
-      <h1>${capitalizeFirstLetterOpenCard()}</h1>
-      <h1>#${clickedPokemon['id']}</h1>
-      <img src="${clickedPokemon['sprites']['other']['official-artwork']['front_default']}">
+      ${loadUpperSectionFromOpenedCard(clickedPokemon)}
       </div>
-
-       <div class="lowerSection">
-
-        <div class="pokemonTags">
-         <p onclick="showAbout()">About</p>
-         <p onclick="showStats()">Stats</p>
-         <p onclick="showSkills()">Skills</p>
-         <p onclick="showEvolutions()" class="evolutions">Evolutions</p>
-        </div>
-        <div class="seperator"></div>
-
-        <div class="about" id="about">
-        <p>Genera: ${detailsPokemon['genera']['7']['genus']} </p>
-        <p>Weight: ${clickedPokemon['weight']} kg (noch durch 10 dividieren)</p>
-        <p>Height: ${clickedPokemon['height']} m(angaben noch in dm)</p>
-        <p id="evolution">${evo} </p>
-        </div>
-
-        <div class="stats d-none" id="stats">
-        <canvas id="myChart"></canvas>
-        </div>
+      <div class="lowerSection">
+      ${loadTagsInLowerSectionOpenedCard()}
+      <div class="seperator"></div>
+      <div class="about" id="about">
+     ${showAboutThePokemon(detailsPokemon, clickedPokemon, evo)}
+      </div>
+      ${showStatsOpenCard()}
 
         <div class="skills d-none" id="skills"></div>
 
@@ -95,32 +69,64 @@ async function openPokemonCard(id) {
       </div></div>
      </div>
     </div>`;
-   
-    if(evo == null ){
-      document.getElementById('evolution').innerHTML = `Evolution from: There is no evolution before!`;
-    }else{
+
+    checkTheEvolutions(evo);
+    bars(id);
+    showAndloadMoves(id);
+    container.classList.remove('d-none');
+}
+
+/*----------------------------Templates----------------------------------------------------------*/
+function closedPokemonCardTemplate(id, currentPokemon,) {
+    return `<div class="closedPokemonCard" id="closedPokemonCard${id}" onclick="openPokemonCard(${id})">
+    <h1 id="pokemonName"> ${capitalizeFirstLetter()}</h1> 
+    <p id="pokemonNumber">#${currentPokemon['id']}</p>
+    <p id="pokemonType1">${currentPokemon['types']['0']['type']['name']}</p>
+    <p id="pokemonType2">${currentPokemon['types']['0']['type']['name']}</p>
+    <img id="pokemonAvatar" src="${currentPokemon['sprites']['other']['official-artwork']['front_default']}">
+    </div>`
+}
+function loadUpperSectionFromOpenedCard(clickedPokemon){
+    return ` <h1>${capitalizeFirstLetterOpenCard()}</h1>
+    <h1>#${clickedPokemon['id']}</h1>
+    <img src="${clickedPokemon['sprites']['other']['official-artwork']['front_default']}">
+    `
+}
+function loadTagsInLowerSectionOpenedCard(){
+    return ` <div class="pokemonTags">
+    <p onclick="showAbout()">About</p>
+    <p onclick="showStats()">Stats</p>
+    <p onclick="showSkills()">Skills</p>
+   </div>`
+}
+function showStatsOpenCard(){
+return `<div class="stats d-none" id="stats">
+<canvas id="myChart"></canvas>
+</div>`
+}
+
+function showAboutThePokemon(detailsPokemon, clickedPokemon, evo) {
+    return `<p>Genera: ${detailsPokemon['genera']['7']['genus']} </p>
+    <p>Weight: ${clickedPokemon['weight'] / 10} kg</p>
+    <p>Height: ${clickedPokemon['height'] / 10} m</p>
+    <p id="evolution">${evo} </p>`
+}
+
+function showAndloadMoves(id) {
+    let container = document.getElementById('skills');
+
+    for (let i = 0; i < allPokemonsData[id]['moves'].length; i++) {
+        container.innerHTML += `<li class="skillsContainer">${allPokemonsData[id]['moves'][i]['move']['name'].charAt(0).toUpperCase() + allPokemonsData[id]['moves'][i]['move']['name'].slice(1)}</li>`;
+    }
+}
+
+function checkTheEvolutions(evo) {
+    if (evo == null) {
+        document.getElementById('evolution').innerHTML = `Evolution from: There is no evolution before!`;
+    } else {
         document.getElementById('evolution').innerHTML = `Evolution from: ` + evo['name'].charAt(0).toUpperCase() + evo['name'].slice(1);
     }
-    container.classList.remove('d-none');
-    bars(id);
-    loadMoves(id);
 }
-
-function closeOpenedPokemonCard() {
-    let container = document.getElementById('openedPokemonCard');
-    container.classList.add('d-none');
-    document.getElementById('about').classList.remove('d-none');
-    document.getElementById('aboutText').classList.remove('d-none');
-    document.getElementById('stats').classList.add('d-none');
-    document.getElementById('skills').classList.add('d-none')
-}
-
-function doNotCloseWhenClickedInsightContainer() {
-    event.stopPropagation();
-  }
-/*----------------------------Templates----------------------------------------------------------*/
-
-
 /*----------------------------Helpfunctions----------------------------------------------------------*/
 function capitalizeFirstLetter() {
     return currentPokemon['name'].charAt(0).toUpperCase() + currentPokemon['name'].slice(1);
@@ -132,14 +138,6 @@ function capitalizeFirstLetterOpenCardEvo(evo) {
     return evo.charAt(0).toUpperCase() + evo.slice(1);
 }
 
-function showPreviousEvolution(id){
-    let evo = detailsPokemon['evolves_from_species']['name'];
-    if(evo < 1 ){
-      document.getElementById('evolution').innerHTML = `There is no evolution before!`;
-    }else{
-        capitalizeFirstLetterOpenCardEvo(evo);
-    }
-}
 function showAbout() {
     document.getElementById('about').classList.remove('d-none')
     document.getElementById('aboutText').classList.remove('d-none')
@@ -161,19 +159,22 @@ function showSkills() {
     document.getElementById('skills').classList.remove('d-none')
     document.getElementById('seperator').classList.add('d-none')
 }
-function showEvolutions() {
-    document.getElementById('stats,statsText').classList.remove('d-none')
-    document.getElementById('about').classList.add('d-none')
+
+
+function closeOpenedPokemonCard() {
+    let container = document.getElementById('openedPokemonCard');
+    container.classList.add('d-none');
+    document.getElementById('about').classList.remove('d-none');
+    document.getElementById('aboutText').classList.remove('d-none');
+    document.getElementById('stats').classList.add('d-none');
+    document.getElementById('skills').classList.add('d-none')
 }
 
-function loadMoves(id){
- let container = document.getElementById('skills');
-
- for(let i = 0 ; i < allPokemonsData[id]['moves'].length; i++){
-    container.innerHTML +=`<li class="skillsContainer">${allPokemonsData[id]['moves'][i]['move']['name'].charAt(0).toUpperCase() + allPokemonsData[id]['moves'][i]['move']['name'].slice(1)}</li>`;
- }
-
+function doNotCloseWhenClickedInsightContainer() {
+    event.stopPropagation();
 }
+
+
 /*------------------Searchfunction---------------------------------*/
 
 async function searchForPokemon() {
@@ -204,8 +205,6 @@ async function searchForPokemon() {
 }
 
 
-
-/*------------------Statsbar---------------------------------*/
 
 
 
