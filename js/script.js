@@ -1,16 +1,18 @@
+let count = 152;
 let allPokemonsData = [];
-let currentPokemon;
 let showedPokemonlength = 51;
 
 function initiate() {
     renderPokemonCards();
+   
 }
 
 /*----------------------------closed PokemonCard-----------------------------------------------------*/
+
 async function renderPokemonCards() {
     let pokemonCardContainer = document.getElementById('pokemonCardContainer');
     pokemonCardContainer.innerHTML = ``;
-    for (id = 1; id < showedPokemonlength; id++) {
+    for (id = 1; id < count; id++) {
         let url = `https://pokeapi.co/api/v2/pokemon/${id}`;
         let response = await fetch(url);
         currentPokemon = await response.json();
@@ -18,7 +20,41 @@ async function renderPokemonCards() {
         pokemonCardContainer.innerHTML +=
             `${closedPokemonCardTemplate(id, currentPokemon,)}`;
         pokemonTypeBackgroundColor(id);
+        
     }
+}
+
+
+/*----------------------------closed PokemonCard->Templates and Helpfunctions------------------------------*/
+function closedPokemonCardTemplate(id, currentPokemon) {
+    return `<div class="closedPokemonCard" id="closedPokemonCard${id}" onclick="openPokemonCard(${id})">
+    <h1 id="pokemonName"> ${capitalizeFirstLetter()}</h1> 
+    <p id="pokemonNumber">${pokemonIdNumberShow(currentPokemon)}</p>
+    <p id="pokemonType">${pokemonTypes(currentPokemon)}</p>
+    <img id="pokemonAvatar" src="${currentPokemon['sprites']['other']['official-artwork']['front_default']}">
+    </div>`
+  
+}
+
+function pokemonTypes(currentPokemon){
+    let types  = currentPokemon['types'];
+   if (types['0'] && types['1'] ){
+    return `<p class="pokemonType">${types['0']['type']['name'].charAt(0).toUpperCase() + types['0']['type']['name'].slice(1)}</p>
+    <p class="pokemonType">${types['1']['type']['name'].charAt(0).toUpperCase() + types['1']['type']['name'].slice(1)}</p>`;
+   }else {
+    return `<p class="pokemonType">${types['0']['type']['name'].charAt(0).toUpperCase() + types['0']['type']['name'].slice(1)}</p>`;
+   }
+}
+
+function pokemonIdNumberShow(currentPokemon){
+    let number = currentPokemon['id'];
+    if (number < 10) {
+        return `#00${number}`;
+      } else if (number < 100) {
+        return `#0${number}`;
+      } else {
+        return `#${number}`;
+      }
 }
 
 function pokemonTypeBackgroundColor(id) {
@@ -28,11 +64,11 @@ function pokemonTypeBackgroundColor(id) {
         container.classList.add(currentPokemonType);
     }
 }
+
 function loadMorePokemons() {
     showedPokemonlength += 50;
     initiate();
 }
-
 /*----------------------------open PokemonCard-----------------------------------------------------*/
 
 async function openPokemonCard(id) {
@@ -42,8 +78,8 @@ async function openPokemonCard(id) {
     clickedPokemon = await response.json();
 
     let details = `https://pokeapi.co/api/v2/pokemon-species/${id}/`;
-    let responseevo = await fetch(details);
-    detailsPokemon = await responseevo.json();
+    let responsedetails = await fetch(details);
+    detailsPokemon = await responsedetails.json();
 
     let evo = detailsPokemon['evolves_from_species'];
 
@@ -77,15 +113,7 @@ async function openPokemonCard(id) {
 }
 
 /*----------------------------Templates----------------------------------------------------------*/
-function closedPokemonCardTemplate(id, currentPokemon,) {
-    return `<div class="closedPokemonCard" id="closedPokemonCard${id}" onclick="openPokemonCard(${id})">
-    <h1 id="pokemonName"> ${capitalizeFirstLetter()}</h1> 
-    <p id="pokemonNumber">#${currentPokemon['id']}</p>
-    <p id="pokemonType1">${currentPokemon['types']['0']['type']['name']}</p>
-    <p id="pokemonType2">${currentPokemon['types']['0']['type']['name']}</p>
-    <img id="pokemonAvatar" src="${currentPokemon['sprites']['other']['official-artwork']['front_default']}">
-    </div>`
-}
+
 function loadUpperSectionFromOpenedCard(clickedPokemon){
     return ` <h1>${capitalizeFirstLetterOpenCard()}</h1>
     <h1>#${clickedPokemon['id']}</h1>
@@ -185,25 +213,44 @@ async function searchForPokemon() {
     list.innerHTML = ``;
 
     for (let index = 0; index < allPokemonsData.length; index++) {
-        let id = index + 1;
-        let url = `https://pokeapi.co/api/v2/pokemon/${id}`;
-        let response = await fetch(url);
-        let pokemon = await response.json();
+        let id = index ;
+        let results = allPokemonsData[id];
+      
 
-        if (pokemon.name.toLowerCase().includes(search) && search.value != 0) {
+        if (results.name.toLowerCase().includes(search) && search.value != 0) {
             list.innerHTML += `
-          <div class="closedPokemonCard" id="closedPokemonCard${id}">
-            <h1 id="pokemonName">${pokemon['name'].charAt(0).toUpperCase() + pokemon['name'].slice(1)}</h1>
-            <p id="pokemonNumber">#${pokemon['id']}</p>
-            <p id="pokemonType1">${pokemon['types']['0']['type']['name']}</p>
-            <p id="pokemonType2">${pokemon['types']['0']['type']['name']}</p>
-            <img id="pokemonAvatar" src="${pokemon['sprites']['other']['official-artwork']['front_default']}">
+          <div class="closedPokemonCard" id="closedPokemonCard${id}" onclick="openPokemonCard(${id})>
+            <h1 id="pokemonName"> ${results['name'].charAt(0).toUpperCase() + results['name'].slice(1)}</h1>
+            <p id="pokemonNumber">${pokemonIdNumberShow(results)}</p>
+            <p class="pokemonTypes">${pokemonTypesSearchfield(results)}</p>
+            <img id="pokemonAvatar" src="${results['sprites']['other']['official-artwork']['front_default']}">
           </div>`;
-
-        }
+          
+          document.getElementById(`closedPokemonCard${id}`).classList.add(`${results['types']['0']['type']['name']}`)
+        } 
     }
 }
 
+function pokemonTypesSearchfield(results){
+   if (results['types']['0'] && results['types']['1'] ){
+    return `<p class="pokemonType">${results['types']['0']['type']['name'].charAt(0).toUpperCase()+ results['types']['0']['type']['name'].slice(1)}</p>
+    <p class="pokemonType">${results['types']['1']['type']['name'].charAt(0).toUpperCase()+ results['types']['1']['type']['name'].slice(1)}</p>`;
+   }else {
+    return `<p class="pokemonType">${results['types']['0']['type']['name'].charAt(0).toUpperCase() + results['types']['0']['type']['name'].slice(1)}</p>`;
+   }
+   
+}
+
+function pokemonIdNumberShowSearchfield(results){
+    let number = results['id'];
+    if (number < 10) {
+        return `#00${number}`;
+      } else if (number < 100) {
+        return `#0${number}`;
+      } else {
+        return `#${number}`;
+      }
+}
 
 
 

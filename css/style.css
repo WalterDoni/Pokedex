@@ -56,7 +56,7 @@ header {
     margin-right: 2.5%;
 }
 
-header div input {
+header form input {
     height: 50px;
     width: 220px;
     border-style: ridge;
@@ -90,7 +90,6 @@ header div input:hover {
     margin: 10px;
     width: 285px;
     border-radius: 18px;
-    background-color: rgb(98, 189, 90);
     position: relative;
     color: white;
     text-shadow: rgba(0, 0, 0, 0.7) 2px 1.5px;
@@ -128,7 +127,7 @@ header div input:hover {
 #pokemonNumber {
     position: relative;
     bottom: 70px;
-    padding-left: 205px;
+    padding-left: 200px;
     font-size: 30px;
 }
 
@@ -137,36 +136,25 @@ header div input:hover {
     height: 210px;
     bottom: 0px;
     left: 75px;
-
-
 }
 
 
-#pokemonType1 {
+.pokemonType  {
     position: relative;
     bottom: 50px;
-    left: 10px;
+    left: 5px;
     color: white;
     font-size: 20px;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.35);
     height: 30px;
-    width: 55px;
+    width: 70px;
     border-radius: 8px;
     padding: 3px;
+    display: flex;
+    justify-content: center;
+
 }
 
-#pokemonType2 {
-    position: relative;
-    bottom: 50px;
-    left: 10px;
-    color: white;
-    font-size: 20px;
-    background-color: rgba(255, 255, 255, 0.2);
-    height: 30px;
-    width: 55px;
-    border-radius: 8px;
-    padding: 3px;
-}
 
 /*----------------------------open PokemonCard-----------------------------------------------------*/
 
