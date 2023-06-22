@@ -1,34 +1,36 @@
-let count = 152;
 let allPokemonsData = [];
-let showedPokemonlength = 51;
+let showedPokemonlength = 52;
 
 function initiate() {
-    renderPokemonCards();
-   
+    fetchDatas();
 }
+
 
 /*----------------------------closed PokemonCard-----------------------------------------------------*/
 
-async function renderPokemonCards() {
+async function fetchDatas() {
     let pokemonCardContainer = document.getElementById('pokemonCardContainer');
     pokemonCardContainer.innerHTML = ``;
-    for (id = 1; id < count; id++) {
+    for (id = 1; id < showedPokemonlength; id++) {
         let url = `https://pokeapi.co/api/v2/pokemon/${id}`;
         let response = await fetch(url);
         currentPokemon = await response.json();
         allPokemonsData.push(currentPokemon);
-        pokemonCardContainer.innerHTML +=
-            `${closedPokemonCardTemplate(id, currentPokemon,)}`;
-        pokemonTypeBackgroundColor(id);
-        
+        renderPokemonCards(id, currentPokemon);  
     }
 }
 
-
+function renderPokemonCards(id, currentPokemon){
+    if( id < showedPokemonlength-1){
+        pokemonCardContainer.innerHTML +=
+        `${closedPokemonCardTemplate(id, currentPokemon,)}`;
+    pokemonTypeBackgroundColor(id);
+    }
+}
 /*----------------------------closed PokemonCard->Templates and Helpfunctions------------------------------*/
 function closedPokemonCardTemplate(id, currentPokemon) {
-    return `<div class="closedPokemonCard" id="closedPokemonCard${id}" onclick="openPokemonCard(${id})">
-    <h1 id="pokemonName"> ${capitalizeFirstLetter()}</h1> 
+    return `<div class="closedPokemonCard " id="closedPokemonCard${id}" onclick="openPokemonCard(${id})">
+    <h1 id="pokemonName" class="pokemonName"> ${capitalizeFirstLetter()}</h1> 
     <p id="pokemonNumber">${pokemonIdNumberShow(currentPokemon)}</p>
     <p id="pokemonType">${pokemonTypes(currentPokemon)}</p>
     <img id="pokemonAvatar" src="${currentPokemon['sprites']['other']['official-artwork']['front_default']}">
@@ -63,6 +65,10 @@ function pokemonTypeBackgroundColor(id) {
     if (currentPokemonType) {
         container.classList.add(currentPokemonType);
     }
+}
+
+function capitalizeFirstLetter() {
+    return currentPokemon['name'].charAt(0).toUpperCase() + currentPokemon['name'].slice(1);
 }
 
 function loadMorePokemons() {
@@ -102,21 +108,24 @@ async function openPokemonCard(id) {
         <div class="seperator" id="seperator"></div>
         <div class="containerWithPokemonInfos">
         <p class="about" id="aboutText">${detailsPokemon['flavor_text_entries']['9']['flavor_text']}</p>
+        
       </div></div>
      </div>
     </div>`;
-
-    checkTheEvolutions(evo);
+    
+    checkTheEvolutions(evo, id);
     bars(id);
     showAndloadMoves(id);
     container.classList.remove('d-none');
 }
 
+
+/*--clickedPokemon['sprites']['versions']['generation-v']['black-white']['animated'].front_default--*/ 
 /*----------------------------Templates----------------------------------------------------------*/
 
 function loadUpperSectionFromOpenedCard(clickedPokemon){
     return ` <h1>${capitalizeFirstLetterOpenCard()}</h1>
-    <h1>#${clickedPokemon['id']}</h1>
+    <h1 class="pokemonName">#${clickedPokemon['id']}</h1>
     <img src="${clickedPokemon['sprites']['other']['official-artwork']['front_default']}">
     `
 }
@@ -133,7 +142,7 @@ return `<div class="stats d-none" id="stats">
 </div>`
 }
 
-function showAboutThePokemon(detailsPokemon, clickedPokemon, evo) {
+function showAboutThePokemon(detailsPokemon, clickedPokemon, evo, id) {
     return `<p>Genera: ${detailsPokemon['genera']['7']['genus']} </p>
     <p>Weight: ${clickedPokemon['weight'] / 10} kg</p>
     <p>Height: ${clickedPokemon['height'] / 10} m</p>
@@ -148,17 +157,17 @@ function showAndloadMoves(id) {
     }
 }
 
-function checkTheEvolutions(evo) {
+function checkTheEvolutions(evo, id) {
+    newid = id - 2;
     if (evo == null) {
         document.getElementById('evolution').innerHTML = `Evolution from: There is no evolution before!`;
+        
     } else {
-        document.getElementById('evolution').innerHTML = `Evolution from: ` + evo['name'].charAt(0).toUpperCase() + evo['name'].slice(1);
+        document.getElementById('evolution').innerHTML = `Evolution from: ` + evo['name'].charAt(0).toUpperCase() + evo['name'].slice(1); 
     }
 }
 /*----------------------------Helpfunctions----------------------------------------------------------*/
-function capitalizeFirstLetter() {
-    return currentPokemon['name'].charAt(0).toUpperCase() + currentPokemon['name'].slice(1);
-}
+
 function capitalizeFirstLetterOpenCard() {
     return clickedPokemon['name'].charAt(0).toUpperCase() + clickedPokemon['name'].slice(1);
 }
@@ -213,14 +222,14 @@ async function searchForPokemon() {
     list.innerHTML = ``;
 
     for (let index = 0; index < allPokemonsData.length; index++) {
-        let id = index ;
+        let id = index  ;
         let results = allPokemonsData[id];
       
 
         if (results.name.toLowerCase().includes(search) && search.value != 0) {
             list.innerHTML += `
-          <div class="closedPokemonCard" id="closedPokemonCard${id}" onclick="openPokemonCard(${id})>
-            <h1 id="pokemonName"> ${results['name'].charAt(0).toUpperCase() + results['name'].slice(1)}</h1>
+          <div class="closedPokemonCard " id="closedPokemonCard${id}" onclick="openPokemonCard(${id}+1)">
+            <h1 id="pokemonName" class="pokemonName"> ${results['name'].charAt(0).toUpperCase() + results['name'].slice(1)}</h1>
             <p id="pokemonNumber">${pokemonIdNumberShow(results)}</p>
             <p class="pokemonTypes">${pokemonTypesSearchfield(results)}</p>
             <img id="pokemonAvatar" src="${results['sprites']['other']['official-artwork']['front_default']}">
@@ -230,6 +239,8 @@ async function searchForPokemon() {
         } 
     }
 }
+
+
 
 function pokemonTypesSearchfield(results){
    if (results['types']['0'] && results['types']['1'] ){

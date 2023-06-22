@@ -67,12 +67,12 @@ header form input {
     font-family: 'Chakra Petch';
 }
 
-header div input:focus {
+header form input:focus {
     outline: none;
     border-color: crimson;
 }
 
-header div input:hover {
+header form input:hover {
     cursor: pointer;
 }
 
@@ -95,10 +95,12 @@ header div input:hover {
     text-shadow: rgba(0, 0, 0, 0.7) 2px 1.5px;
     height: 250px;
     box-shadow: rgba(255, 255, 255, 0.6) 0 15px 30px -3px;
+    transition: .3s ease-in-out;
 }
 
 .closedPokemonCard:hover {
-    transform: scale(1.08);
+    transform: scale(1.1);
+   
     cursor: pointer;
 }
 
@@ -119,7 +121,7 @@ header div input:hover {
 
 }
 
-.closedPokemonCard h1 {
+.pokemonName {
     font-size: 28px;
     margin: 8px;
 }
@@ -180,7 +182,6 @@ header div input:hover {
     box-shadow: rgba(255, 255, 255, 0.6) 0 15px 30px;
     border-radius: 18px;
 }
-
 .seperator {
     background-color: white;
     height: 1px;
@@ -189,7 +190,7 @@ header div input:hover {
 }
 
 
-
+    
 /*----------------------------open PokemonCard -->Upper-Section-----------------------------------------------------*/
 .upperSection {
     background-image: url(../img/openCardBackground.jpg);
@@ -241,7 +242,9 @@ header div input:hover {
 /*----------------------------open PokemonCard --> Lower-Section--> different Stats -----------------------------------------------------*/
 .about {
     margin-left: 30px;
+    padding-right: 30px;
 }
+
 
 .skills {
 
