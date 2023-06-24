@@ -4,6 +4,10 @@ body {
     margin: 0;
     background-color: black;
     z-index: 1;
+
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 body::-webkit-scrollbar {
@@ -44,13 +48,10 @@ header {
     margin-left: 10%;
     width: 250px;
     height: auto;
+    padding-top: 2px;
 
 }
 
-.headerPokeballLogo {
-    width: 100px;
-    height: auto;
-}
 
 .searchfield {
     margin-right: 2.5%;
@@ -106,7 +107,7 @@ header form input:hover {
 
 .closedPokemonCard::before {
     content: "";
-    background-image: url(../img/pokeball.jpg);
+    background-image: url(../img/pokeball3.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -147,13 +148,16 @@ header form input:hover {
     left: 5px;
     color: white;
     font-size: 20px;
-    background-color: rgba(255, 255, 255, 0.35);
-    height: 30px;
-    width: 70px;
+    background-color: rgba(19, 11, 11, 0.25);
+    height: 25px;
+    width: 67px;
     border-radius: 8px;
     padding: 3px;
     display: flex;
     justify-content: center;
+    align-items: center;
+    border-style: ridge;
+
 
 }
 
@@ -223,11 +227,14 @@ header form input:hover {
 .pokemonTags p {
     box-shadow: inset 0 0 0 crimson;
     transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+    border-radius: 4px;
+    padding: 2px;
 }
 
 .pokemonTags p:hover {
     cursor: pointer;
-    box-shadow: inset 100px 0 0 0 crimson;
+    box-shadow: inset 150px 0 0 0 crimson;
+    border-radius: 4px;
     color: white;
 }
 
@@ -278,6 +285,7 @@ header form input:hover {
     flex-direction: column;
     align-items: center;
     padding: 35px 0px;
+    margin-top: auto;
 }
 
 .loadbutton button {
@@ -308,7 +316,7 @@ header form input:hover {
 footer {
     display: flex;
     justify-content: space-around;
-    width: 100%;
+  
     font-style: italic;
     color: rgb(0, 0, 0);
     border-top: 8px solid crimson;
@@ -317,12 +325,32 @@ footer {
     border-left: none;
     border-right: none;
     background-color: beige;
+    font-size: 18px;
+}
+
+.mbe0{
+    margin-block-end: 0px;
 }
 
 footer div {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+footer a{
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: inset 0 0 0 crimson;
+    transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+
+}
+
+footer a:hover{ 
+    cursor: pointer;
+    color: white;
+    box-shadow: inset 200px 0 0 0 crimson;
 }
 
 /*------------------PokemonTypeColors-----------------*/
@@ -388,4 +416,12 @@ footer div {
 
 .fairy {
     background-color: rgb(236, 143, 230);
+}
+
+.dark{
+    background-color: rgb(112,88,72);
+}
+
+.steel{
+   background-color: rgb(184,184,208);
 }

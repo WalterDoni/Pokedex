@@ -1,0 +1,191 @@
+@media(max-width: 1200px) {
+
+
+    header form input {
+        height: 50px;
+        width: 150px;
+    }
+
+}
+
+@media(max-width:850px) {
+    footer {
+        flex-direction: column;
+        padding-left: 20%;
+    }
+}
+
+
+@media(max-width: 700px) {
+
+    header {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .searchfield input {
+        height: 40px;
+        width: 120px;
+        font-size: 15px;
+        width: 100%;
+    }
+
+    .headerLogo {
+
+        width: 200px;
+        margin-left: 0;
+    }
+
+    .searchfield {
+        width: 50%;
+        padding: 10px;
+    }
+
+    .closedPokemonCard {
+        width: 200px;
+
+    }
+
+    .closedPokemonCard::before {
+        background-size: 180%;
+        ;
+    }
+
+    .pokemonName {
+        font-size: 20px;
+    }
+
+    #pokemonNumber {
+        bottom: 45px;
+        padding-left: 130px;
+        font-size: 20px;
+    }
+
+    .pokemonType {
+        height: 20px;
+        width: 50px;
+        font-size: 15px;
+    }
+
+    #pokemonType {
+        display: flex;
+        justify-content: space-around;
+        padding-top: 140px;
+    }
+
+    #pokemonAvatar {
+        height: 180px;
+        bottom: 40px;
+        left: 15px;
+    }
+
+    footer {
+        padding-left: 10%;
+        font-size: 14px;
+    }
+
+    .loadbutton button {
+        font-size: 15px;
+        height: 80px;
+        width: 100px;
+    }
+
+    .openMainContainerPokemon {
+        width: 400px;
+        height: 600px;
+        font-size: 16px;
+    }
+
+    .upperSection img {
+        height: 245px;
+        margin-left: 135px;
+        margin-top: -50px;
+    }
+
+    #myChart {
+        width: 350px !important;
+        height: 260px !important;
+        padding-left: 7px;
+    }
+
+    .skills{
+        height: 240px;
+    }
+}
+
+@media(max-width:600px) {
+    footer {
+        padding-left: 10%;
+    }
+}
+
+@media(max-width: 500px) {
+
+    .closedPokemonCard {
+        width: 150px;
+    }
+
+    .pokemonName {
+        margin: 5px;
+    }
+
+    #pokemonNumber {
+        bottom: 18px;
+        padding-left: 5px;
+        font-size: 16px;
+
+    }
+
+    #pokemonAvatar {
+        height: 150px;
+        bottom: 55px;
+        left: 5px;
+    }
+
+    .pokemonType {
+        bottom: 35px;
+        height: 15px;
+        width: 45px;
+        font-size: 14px;
+
+    }
+
+
+    @media(max-width:450px){
+        .openMainContainerPokemon {
+            width: 300px;
+            height: 500px;
+            font-size: 14px;
+        }
+        
+        .upperSection h1{
+            margin-left: 5px;
+
+        }
+        .upperSection img {
+            height: 170px;
+            margin-left: 90px;
+            margin-top: -40px;
+        }
+    
+        #myChart {
+            width: 280px !important;
+            height: 200px !important;
+            padding-left: 7px;
+        }
+    
+        .skills{
+            height: 240px;
+        }
+
+        #myChart {
+            width: 275px !important;
+            padding-left: 7px;
+        }
+    }
+    @media(max-width:370px) {
+        footer {
+            padding-left: 5%;
+        }
+    }
+}

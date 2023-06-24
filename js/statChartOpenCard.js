@@ -20,15 +20,30 @@ async function bars(id) {
                 data: [clickedPokemon['stats']['0']['base_stat'], clickedPokemon['stats']['1']['base_stat'], clickedPokemon['stats']['2']['base_stat'], clickedPokemon['stats']['3']['base_stat'], clickedPokemon['stats']['4']['base_stat'], clickedPokemon['stats']['5']['base_stat']],
                 borderColor: [
                     'white',
-                  ],
-                  borderWidth: 1.5
+                ],
+                borderWidth: 1.5
             }]
         },
-         options: {
-            indexAxis: 'y', 
+        options: {
+            indexAxis: 'y',
             plugins: {
-                legend: {display:false},
-            },   
-        }  
+                legend: { display: false },
+            },
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                stacked: true,
+                grid: {
+                  display: true,
+                  color: "rgba(255,99,132,0.2)"
+                }
+              },
+              x: {
+                grid: {
+                  display: false
+                }
+              }
+            }
+        }
     })
 }
