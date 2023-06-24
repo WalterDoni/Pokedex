@@ -29,7 +29,7 @@ function renderPokemonCards(id, currentPokemon){
 }
 
 function loadMorePokemons() {
-    showedPokemonlength += 100;
+    showedPokemonlength += 50;
     initiate();
 }
 /*----------------------------closed PokemonCard->Helpfunctions------------------------------*/
