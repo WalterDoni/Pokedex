@@ -3,18 +3,20 @@ function closedPokemonCardTemplate(id, currentPokemon) {
     return `<div class="closedPokemonCard " id="closedPokemonCard${id}" onclick="openPokemonCard(${id})">
     <h1 id="pokemonName" class="pokemonName"> ${nameOfThePokemon()}</h1> 
     <p id="pokemonNumber">${pokemonIdNumberShow(currentPokemon)}</p>
-    <div id="pokemonType">${pokemonTypes(currentPokemon)}</div>
+    <div id="pokemonType">${pokemonTypes(currentPokemon, id)}</div>
     <img id="pokemonAvatar" src="${currentPokemon['sprites']['other']['official-artwork']['front_default']}">
     </div>`
 }
 
-function pokemonTypes(currentPokemon){
+function pokemonTypes(currentPokemon, id){
     let types  = currentPokemon['types'];
+    let plusone = id + 1 ;
    if (types['0'] && types['1'] ){
-    return `<p class="pokemonType">${types['0']['type']['name'].charAt(0).toUpperCase() + types['0']['type']['name'].slice(1)}</p>
-    <p class="pokemonType">${types['1']['type']['name'].charAt(0).toUpperCase() + types['1']['type']['name'].slice(1)}</p>`;
+    return `<p class="pokemonType" id="type${id}">${types['0']['type']['name'].charAt(0).toUpperCase() + types['0']['type']['name'].slice(1)}</p>
+    <p class="pokemonType" id="type${plusone}">${types['1']['type']['name'].charAt(0).toUpperCase() + types['1']['type']['name'].slice(1)}</p>`;
+    
    }else {
-    return `<p class="pokemonType">${types['0']['type']['name'].charAt(0).toUpperCase() + types['0']['type']['name'].slice(1)}</p>`;
+    return `<p class="pokemonType" id="type${id}">${types['0']['type']['name'].charAt(0).toUpperCase() + types['0']['type']['name'].slice(1)}</p>`;
    }
 }
 

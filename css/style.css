@@ -2,9 +2,8 @@ body {
     font-family: 'Chakra Petch';
     font-style: italic;
     margin: 0;
-    background-color: black;
+    background: radial-gradient(circle, rgba(44,51,171,1) 28%, rgba(70,29,14,1) 60%, rgba(61,61,61,1) 81%);
     z-index: 1;
-
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -15,7 +14,7 @@ body::-webkit-scrollbar {
 }
 
 body::-webkit-scrollbar-track {
-    background: black;
+    background-color: black;
 
 }
 
@@ -41,11 +40,13 @@ header {
     border-top: none;
     border-left: none;
     border-right: none;
-    background-color: beige !important;
+
+    background: linear-gradient(103deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
 }
 
 .headerLogo {
     margin-left: 10%;
+    margin-bottom: 2px;
     width: 250px;
     height: auto;
     padding-top: 2px;
@@ -84,7 +85,7 @@ header form input:hover {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background-color: black;
+    background: radial-gradient(circle, rgba(44, 51, 171, 1) 28%, rgba(70, 29, 14, 1) 60%, rgba(61, 61, 61, 1) 81%);
 }
 
 .closedPokemonCard {
@@ -101,7 +102,6 @@ header form input:hover {
 
 .closedPokemonCard:hover {
     transform: scale(1.1);
-   
     cursor: pointer;
 }
 
@@ -142,7 +142,7 @@ header form input:hover {
 }
 
 
-.pokemonType  {
+.pokemonType {
     position: relative;
     bottom: 50px;
     left: 5px;
@@ -157,7 +157,6 @@ header form input:hover {
     justify-content: center;
     align-items: center;
     border-style: ridge;
-
 
 }
 
@@ -182,10 +181,11 @@ header form input:hover {
 .openMainContainerPokemon {
     height: 800px;
     width: 600px;
-    background-color: black;
+    background-color: rgb(10, 10, 10);
     box-shadow: rgba(255, 255, 255, 0.6) 0 15px 30px;
     border-radius: 18px;
 }
+
 .seperator {
     background-color: white;
     height: 1px;
@@ -194,7 +194,7 @@ header form input:hover {
 }
 
 
-    
+
 /*----------------------------open PokemonCard -->Upper-Section-----------------------------------------------------*/
 .upperSection {
     background-image: url(../img/openCardBackground.jpg);
@@ -228,7 +228,8 @@ header form input:hover {
     box-shadow: inset 0 0 0 crimson;
     transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
     border-radius: 4px;
-    padding: 2px;
+    padding: 4px;
+    background-color: rgb(255, 255, 255, 0.2);
 }
 
 .pokemonTags p:hover {
@@ -242,10 +243,11 @@ header form input:hover {
     width: 100%;
 }
 
-#myChart{
-    width: 575px!important;
+#myChart {
+    width: 575px !important;
     padding-left: 10px;
 }
+
 /*----------------------------open PokemonCard --> Lower-Section--> different Stats -----------------------------------------------------*/
 .about {
     margin-left: 30px;
@@ -265,6 +267,7 @@ header form input:hover {
     padding-left: 15px;
     margin-top: 5px;
 }
+
 .skills::-webkit-scrollbar {
     width: 12px;
     border-radius: 18px;
@@ -276,7 +279,7 @@ header form input:hover {
 
 .skills::-webkit-scrollbar-thumb {
     background-color: white;
-    border-radius: 20px; 
+    border-radius: 20px;
 }
 
 /*--------------------------------Buttons-----------------------------------------------------*/
@@ -293,12 +296,12 @@ header form input:hover {
     color: white;
     border: none;
     font-size: 18px;
-    height: 100px;
-    width: 120px;
+    height: 70px;
+    width: 200px;
     box-shadow: 0 6px 10px rgba(255, 255, 255, 0.7);
     cursor: pointer;
     transition: all 0.2s ease;
-    border-radius: 50%;
+    border-radius: 8%;
 }
 
 .loadbutton button:active {
@@ -311,12 +314,73 @@ header form input:hover {
     margin-top: 10px;
 }
 
+.glow-on-hover {
+
+    border: none;
+    outline: none;
+    color: #fff;
+    position: relative;
+}
+
+.glow-on-hover:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 8%;
+}
+
+.glow-on-hover:active {
+    color: white
+}
+
+.glow-on-hover:active:after {
+    background: transparent;
+}
+
+.glow-on-hover:hover:before {
+    opacity: 1;
+}
+
+.glow-on-hover:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    left: 0;
+    top: 0;
+    border-radius: 8%;
+}
+
+@keyframes glowing {
+    0% {
+        background-position: 0 0;
+    }
+
+    50% {
+        background-position: 400% 0;
+    }
+
+    100% {
+        background-position: 0 0;
+    }
+}
 
 /*--------------------------------Footer-----------------------------------------------------*/
 footer {
     display: flex;
     justify-content: space-around;
-  
     font-style: italic;
     color: rgb(0, 0, 0);
     border-top: 8px solid crimson;
@@ -324,11 +388,11 @@ footer {
     border-bottom: none;
     border-left: none;
     border-right: none;
-    background-color: beige;
+    background-color: rgba(245, 245, 220, 0.877);
     font-size: 18px;
 }
 
-.mbe0{
+.mbe0 {
     margin-block-end: 0px;
 }
 
@@ -338,7 +402,7 @@ footer div {
     justify-content: center;
 }
 
-footer a{
+footer a {
     color: black;
     font-weight: bold;
     text-decoration: none;
@@ -347,7 +411,7 @@ footer a{
 
 }
 
-footer a:hover{ 
+footer a:hover {
     cursor: pointer;
     color: white;
     box-shadow: inset 200px 0 0 0 crimson;
@@ -418,10 +482,10 @@ footer a:hover{
     background-color: rgb(236, 143, 230);
 }
 
-.dark{
-    background-color: rgb(112,88,72);
+.dark {
+    background-color: rgb(112, 88, 72);
 }
 
-.steel{
-   background-color: rgb(184,184,208);
+.steel {
+    background-color: rgb(184, 184, 208);
 }

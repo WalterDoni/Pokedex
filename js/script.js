@@ -29,7 +29,7 @@ function renderPokemonCards(id, currentPokemon){
 }
 
 function loadMorePokemons() {
-    showedPokemonlength += 50;
+    showedPokemonlength += 30;
     initiate();
 }
 /*----------------------------closed PokemonCard->Helpfunctions------------------------------*/
@@ -58,10 +58,7 @@ function nameOfThePokemon() {
     return currentPokemon['name'].charAt(0).toUpperCase() + currentPokemon['name'].slice(1);
 }
 
-function loadMorePokemons() {
-    showedPokemonlength += 100;
-    initiate();
-}
+
 /*----------------------------open PokemonCard-----------------------------------------------------*/
 
 async function openPokemonCard(id) {
