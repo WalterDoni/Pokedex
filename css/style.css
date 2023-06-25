@@ -40,7 +40,6 @@ header {
     border-top: none;
     border-left: none;
     border-right: none;
-
     background: linear-gradient(103deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
 }
 
@@ -85,7 +84,7 @@ header form input:hover {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background: radial-gradient(circle, rgba(44, 51, 171, 1) 28%, rgba(70, 29, 14, 1) 60%, rgba(61, 61, 61, 1) 81%);
+
 }
 
 .closedPokemonCard {
@@ -181,7 +180,7 @@ header form input:hover {
 .openMainContainerPokemon {
     height: 800px;
     width: 600px;
-    background-color: rgb(10, 10, 10);
+    background-color: rgb(22, 22, 22);
     box-shadow: rgba(255, 255, 255, 0.6) 0 15px 30px;
     border-radius: 18px;
 }
@@ -388,8 +387,9 @@ footer {
     border-bottom: none;
     border-left: none;
     border-right: none;
-    background-color: rgba(245, 245, 220, 0.877);
+    background: linear-gradient(103deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
     font-size: 18px;
+
 }
 
 .mbe0 {
