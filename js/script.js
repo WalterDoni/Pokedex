@@ -8,6 +8,9 @@ function initiate() {
 
 /*----------------------------closed PokemonCard-----------------------------------------------------*/
 
+/**
+ * Fetch every needed data from the API and push it into an array named allPokemonsData.
+ */
 async function fetchDatas() {
     let pokemonCardContainer = document.getElementById('pokemonCardContainer');
     pokemonCardContainer.innerHTML = ``;
@@ -20,6 +23,9 @@ async function fetchDatas() {
     }
 }
 
+/**
+ * Render into the HTML-Element and display them.
+ */
 function renderPokemonCards(id, currentPokemon){
     if( id < showedPokemonlength-1){
         pokemonCardContainer.innerHTML +=
@@ -28,13 +34,18 @@ function renderPokemonCards(id, currentPokemon){
     }
 }
 
+/**
+ * After klick on a button, it will load and show 30 more pokemons. 
+ */
 function loadMorePokemons() {
     showedPokemonlength += 30;
     initiate();
 }
 /*----------------------------closed PokemonCard->Helpfunctions------------------------------*/
 
-
+/**
+ * Show on the right top from the card the pokemonId. Depens on the value it will add 0 before #.
+ */
 function pokemonIdNumberShow(currentPokemon){
     let number = currentPokemon['id'];
     if (number < 10) {
@@ -46,6 +57,9 @@ function pokemonIdNumberShow(currentPokemon){
       }
 }
 
+/**
+ * Change the background from the card in to the type of the pokemon.
+ */
 function pokemonTypeBackgroundColor(id) {
     let currentPokemonType = currentPokemon['types']['0']['type']['name'];
     let container = document.getElementById(`closedPokemonCard${id}`);
@@ -61,6 +75,10 @@ function nameOfThePokemon() {
 
 /*----------------------------open PokemonCard-----------------------------------------------------*/
 
+/**
+ * Open an new card with more details from the selected pokemon. Which includes the evolution before, stats, skills and more.
+ * @param {number} id -> Needed to load the right dataset for the selected pokemon.
+ */
 async function openPokemonCard(id) {
     let container = document.getElementById('openedPokemonCard');
     let url = `https://pokeapi.co/api/v2/pokemon/${id}`;
@@ -121,6 +139,10 @@ async function searchForPokemon() {
     }
 }
 
+/**
+ * Get the searched data for the template which get initiated by the "searchFunctionTemplate()" function.
+ * @param {string} results -> Displayed pokemon types (fire,poison,...)
+ */
 function pokemonTypesSearchfield(results){
    if (results['types']['0'] && results['types']['1'] ){
     return `<p class="pokemonType">${results['types']['0']['type']['name'].charAt(0).toUpperCase()+ results['types']['0']['type']['name'].slice(1)}</p>
@@ -131,6 +153,10 @@ function pokemonTypesSearchfield(results){
    
 }
 
+/**
+ * Get the searched data for the template which get initiated by the "searchFunctionTemplate()" function.
+ * @param {string} results -> Number from the selected pokemon.
+ */
 function pokemonIdNumberShowSearchfield(results){
     let number = results['id'];
     if (number < 10) {
