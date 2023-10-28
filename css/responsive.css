@@ -3,7 +3,7 @@
 
     header form input {
         height: 50px;
-        width: 150px;
+   
     }
 
 }
@@ -16,7 +16,7 @@
 }
 
 
-@media(max-width: 700px) {
+@media(max-width: 820px) {
 
     header {
         display: flex;

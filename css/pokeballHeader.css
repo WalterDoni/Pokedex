@@ -104,7 +104,7 @@
 
 /*-----Responive Pokeball---*/
 
-@media (max-width: 700px){
+@media (max-width: 820px){
   .pokeball {
    display:none;
 }

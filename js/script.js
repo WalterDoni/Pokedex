@@ -19,18 +19,18 @@ async function fetchDatas() {
         let response = await fetch(url);
         currentPokemon = await response.json();
         allPokemonsData.push(currentPokemon);
-        renderPokemonCards(id, currentPokemon);  
+        renderPokemonCards(id, currentPokemon);
     }
 }
 
 /**
  * Render into the HTML-Element and display them.
  */
-function renderPokemonCards(id, currentPokemon){
-    if( id < showedPokemonlength-1){
+function renderPokemonCards(id, currentPokemon) {
+    if (id < showedPokemonlength - 1) {
         pokemonCardContainer.innerHTML +=
-        `${closedPokemonCardTemplate(id, currentPokemon)}`;
-    pokemonTypeBackgroundColor(id);
+            `${closedPokemonCardTemplate(id, currentPokemon)}`;
+        pokemonTypeBackgroundColor(id);
     }
 }
 
@@ -46,15 +46,15 @@ function loadMorePokemons() {
 /**
  * Show on the right top from the card the pokemonId. Depens on the value it will add 0 before #.
  */
-function pokemonIdNumberShow(currentPokemon){
+function pokemonIdNumberShow(currentPokemon) {
     let number = currentPokemon['id'];
     if (number < 10) {
         return `#00${number}`;
-      } else if (number < 100) {
+    } else if (number < 100) {
         return `#0${number}`;
-      } else {
+    } else {
         return `#${number}`;
-      }
+    }
 }
 
 /**
@@ -88,11 +88,11 @@ async function openPokemonCard(id) {
     let details = `https://pokeapi.co/api/v2/pokemon-species/${id}/`;
     let responsedetails = await fetch(details);
     detailsPokemon = await responsedetails.json();
-    
+
     let evo = detailsPokemon['evolves_from_species'];
 
-    container.innerHTML = `${openPokemonCardTemplate(clickedPokemon,detailsPokemon,evo)}`;
-    
+    container.innerHTML = `${openPokemonCardTemplate(clickedPokemon, detailsPokemon, evo)}`;
+
     checkTheEvolutions(evo, id);
     bars(id);
     showAndloadMoves(id);
@@ -111,9 +111,9 @@ function checkTheEvolutions(evo, id) {
     newid = id - 2;
     if (evo == null) {
         document.getElementById('evolution').innerHTML = `Evolution from: There is no evolution before!`;
-        
+
     } else {
-        document.getElementById('evolution').innerHTML = `Evolution from: ` + evo['name'].charAt(0).toUpperCase() + evo['name'].slice(1); 
+        document.getElementById('evolution').innerHTML = `Evolution from: ` + evo['name'].charAt(0).toUpperCase() + evo['name'].slice(1);
     }
 }
 
@@ -121,21 +121,28 @@ function checkTheEvolutions(evo, id) {
 /*------------------Searchfunction---------------------------------*/
 
 async function searchForPokemon() {
-    let search = document.getElementById('searchfield').value;
-    search = search.toLowerCase();
-
+    let searchvalue = document.getElementById('searchfield').value;
+    search = searchvalue.toLowerCase();
+    let clearHTML = false;
     let list = document.getElementById('pokemonCardContainer');
     list.innerHTML = ``;
-
     for (let index = 0; index < allPokemonsData.length; index++) {
-        let id = index  ;
+        if (clearHTML) {
+            list.innerHTML = '';
+            clear = false;
+        }
+        let id = index;
         let results = allPokemonsData[id];
-      
-        if (results.name.toLowerCase().includes(search) && search.value != 0) {
+        if (results.name.toLowerCase().includes(search)) {
             list.innerHTML += `
           ${searchFunctionTemplate(results, id)}`;
-          document.getElementById(`closedPokemonCard${id}`).classList.add(`${results['types']['0']['type']['name']}`)
-        } 
+            document.getElementById(`closedPokemonCard${id}`).classList.add(`${results['types']['0']['type']['name']}`)
+        }
+        if (list.innerHTML.trim() === '') {
+          
+            list.innerHTML = "There is no Pokemon with the name " + searchvalue;
+            clearHTML = true;
+        }
     }
 }
 
@@ -143,44 +150,44 @@ async function searchForPokemon() {
  * Get the searched data for the template which get initiated by the "searchFunctionTemplate()" function.
  * @param {string} results -> Displayed pokemon types (fire,poison,...)
  */
-function pokemonTypesSearchfield(results){
-   if (results['types']['0'] && results['types']['1'] ){
-    return `<p class="pokemonType">${results['types']['0']['type']['name'].charAt(0).toUpperCase()+ results['types']['0']['type']['name'].slice(1)}</p>
-    <p class="pokemonType">${results['types']['1']['type']['name'].charAt(0).toUpperCase()+ results['types']['1']['type']['name'].slice(1)}</p>`;
-   }else {
-    return `<p class="pokemonType">${results['types']['0']['type']['name'].charAt(0).toUpperCase() + results['types']['0']['type']['name'].slice(1)}</p>`;
-   }
-   
+function pokemonTypesSearchfield(results) {
+    if (results['types']['0'] && results['types']['1']) {
+        return `<p class="pokemonType">${results['types']['0']['type']['name'].charAt(0).toUpperCase() + results['types']['0']['type']['name'].slice(1)}</p>
+    <p class="pokemonType">${results['types']['1']['type']['name'].charAt(0).toUpperCase() + results['types']['1']['type']['name'].slice(1)}</p>`;
+    } else {
+        return `<p class="pokemonType">${results['types']['0']['type']['name'].charAt(0).toUpperCase() + results['types']['0']['type']['name'].slice(1)}</p>`;
+    }
+
 }
 
 /**
  * Get the searched data for the template which get initiated by the "searchFunctionTemplate()" function.
  * @param {string} results -> Number from the selected pokemon.
  */
-function pokemonIdNumberShowSearchfield(results){
+function pokemonIdNumberShowSearchfield(results) {
     let number = results['id'];
     if (number < 10) {
         return `#00${number}`;
-      } else if (number < 100) {
+    } else if (number < 100) {
         return `#0${number}`;
-      } else {
+    } else {
         return `#${number}`;
-      }
+    }
 }
 
 /*------------------------Change-Placeholdertext----------------------------------*/
 
-window.addEventListener('resize', function() {
+window.addEventListener('resize', function () {
     let searchfield = document.getElementById('searchfield');
-    if (window.innerWidth <= 1200) {
-      searchfield.setAttribute('placeholder', 'Search Pokemon...');
+    if (window.innerWidth <= 450) {
+        searchfield.setAttribute('placeholder', 'Pokemon name...');
     } else {
-      searchfield.setAttribute('placeholder', 'Search for specific Pokemon...');
+        searchfield.setAttribute('placeholder', 'Search for a Pokemon by name...');
     }
-  });
+});
 
 
-  /*----------------------------Helpfunctions----------------------------------------------------------*/
+/*----------------------------Helpfunctions----------------------------------------------------------*/
 
 function capitalizeFirstLetterOpenCard() {
     return clickedPokemon['name'].charAt(0).toUpperCase() + clickedPokemon['name'].slice(1);
