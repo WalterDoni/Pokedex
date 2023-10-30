@@ -123,14 +123,10 @@ function checkTheEvolutions(evo, id) {
 async function searchForPokemon() {
     let searchvalue = document.getElementById('searchfield').value;
     search = searchvalue.toLowerCase();
-    let clearHTML = false;
+
     let list = document.getElementById('pokemonCardContainer');
     list.innerHTML = ``;
     for (let index = 0; index < allPokemonsData.length; index++) {
-        if (clearHTML) {
-            list.innerHTML = '';
-            clear = false;
-        }
         let id = index;
         let results = allPokemonsData[id];
         if (results.name.toLowerCase().includes(search)) {
@@ -138,11 +134,7 @@ async function searchForPokemon() {
           ${searchFunctionTemplate(results, id)}`;
             document.getElementById(`closedPokemonCard${id}`).classList.add(`${results['types']['0']['type']['name']}`)
         }
-        if (list.innerHTML.trim() === '') {
-          
-            list.innerHTML = "There is no Pokemon with the name " + searchvalue;
-            clearHTML = true;
-        }
+      
     }
 }
 
@@ -182,7 +174,7 @@ window.addEventListener('resize', function () {
     if (window.innerWidth <= 450) {
         searchfield.setAttribute('placeholder', 'Pokemon name...');
     } else {
-        searchfield.setAttribute('placeholder', 'Search for a Pokemon by name...');
+        searchfield.setAttribute('placeholder', 'Search Pokemon by name...');
     }
 });
 
