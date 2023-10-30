@@ -126,15 +126,21 @@ async function searchForPokemon() {
 
     let list = document.getElementById('pokemonCardContainer');
     list.innerHTML = ``;
+    let foundPokemon = false; // Eine Variable, um festzuhalten, ob ein Pokémon gefunden wurde
+
     for (let index = 0; index < allPokemonsData.length; index++) {
         let id = index;
         let results = allPokemonsData[id];
         if (results.name.toLowerCase().includes(search)) {
             list.innerHTML += `
           ${searchFunctionTemplate(results, id)}`;
-            document.getElementById(`closedPokemonCard${id}`).classList.add(`${results['types']['0']['type']['name']}`)
+            document.getElementById(`closedPokemonCard${id}`).classList.add(`${results['types']['0']['type']['name']}`);
+            foundPokemon = true; // Ein Pokémon wurde gefunden
         }
-      
+    }
+
+    if (!foundPokemon) {
+        list.innerHTML = "There is no Pokémon with the name " + searchvalue;
     }
 }
 
